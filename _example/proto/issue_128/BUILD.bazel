@@ -1,0 +1,43 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "examplepb_proto",
+    srcs = ["grpc-gateway_a_bit_of_everything.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//examples/internal/proto/pathenum:pathenum_proto",
+        "//examples/internal/proto/sub:sub_proto",
+        "//examples/internal/proto/sub2:sub2_proto",
+        "//google/api:api_proto",
+        "//protoc-gen-swagger/options:options_proto",
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:empty_proto",
+        "@com_google_protobuf//:field_mask_proto",
+        "@com_google_protobuf//:timestamp_proto",
+        "@com_google_protobuf//:wrappers_proto",
+    ],
+)
+
+go_proto_library(
+    name = "examplepb_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "github.com/yoheimuta/protolint/_example/proto/issue_128",
+    proto = ":examplepb_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//examples/internal/proto/pathenum:path_enum_proto",
+        "//examples/internal/proto/sub:message_proto",
+        "//examples/internal/proto/sub2:message_proto",
+        "//google/api:annotations_proto",
+        "//protoc-gen-swagger/options:annotations_proto",
+    ],
+)
+
+go_library(
+    name = "issue_128",
+    embed = [":examplepb_go_proto"],
+    importpath = "github.com/yoheimuta/protolint/_example/proto/issue_128",
+    visibility = ["//visibility:public"],
+)

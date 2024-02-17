@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "lib",
+    srcs = ["lint.go"],
+    importpath = "github.com/yoheimuta/protolint/lib",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//internal/cmd",
+        "//internal/osutil",
+    ],
+)
+
+go_test(
+    name = "lib_test",
+    srcs = ["lint_test.go"],
+    deps = [
+        ":lib",
+        "//internal/setting_test",
+    ],
+)

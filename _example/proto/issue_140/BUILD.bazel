@@ -1,0 +1,23 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "negative_enum_field_proto",
+    srcs = ["negative_enum_field.proto"],
+    visibility = ["//visibility:public"],
+)
+
+go_proto_library(
+    name = "negative_enum_field_go_proto",
+    importpath = "github.com/yoheimuta/protolint/_example/proto/issue_140",
+    proto = ":negative_enum_field_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "issue_140",
+    embed = [":negative_enum_field_go_proto"],
+    importpath = "github.com/yoheimuta/protolint/_example/proto/issue_140",
+    visibility = ["//visibility:public"],
+)

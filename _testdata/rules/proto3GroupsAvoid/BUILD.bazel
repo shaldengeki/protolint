@@ -1,0 +1,28 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "proto3GroupsAvoid_proto",
+    srcs = [
+        "disable_next.proto",
+        "disable_this.proto",
+        "invalid.proto",
+        "valid.proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+go_proto_library(
+    name = "proto3GroupsAvoid_go_proto",
+    importpath = "github.com/yoheimuta/protolint/_testdata/rules/proto3GroupsAvoid",
+    proto = ":proto3GroupsAvoid_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "proto3GroupsAvoid",
+    embed = [":proto3GroupsAvoid_go_proto"],
+    importpath = "github.com/yoheimuta/protolint/_testdata/rules/proto3GroupsAvoid",
+    visibility = ["//visibility:public"],
+)

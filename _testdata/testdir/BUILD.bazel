@@ -1,0 +1,26 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "testdir_proto",
+    srcs = [
+        "test.proto",
+        "test2.proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+go_proto_library(
+    name = "testdir_go_proto",
+    importpath = "github.com/yoheimuta/protolint/_testdata/testdir",
+    proto = ":testdir_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "testdir",
+    embed = [":testdir_go_proto"],
+    importpath = "github.com/yoheimuta/protolint/_testdata/testdir",
+    visibility = ["//visibility:public"],
+)

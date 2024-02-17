@@ -1,0 +1,16 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "protocgenprotolint",
+    srcs = ["cmd.go"],
+    importpath = "github.com/yoheimuta/protolint/internal/cmd/protocgenprotolint",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/cmd/subcmds",
+        "//internal/cmd/subcmds/lint",
+        "//internal/osutil",
+        "@com_github_golang_protobuf//proto:go_default_library",
+        "@com_github_golang_protobuf//protoc-gen-go/plugin",
+        "@org_golang_google_protobuf//types/pluginpb",
+    ],
+)

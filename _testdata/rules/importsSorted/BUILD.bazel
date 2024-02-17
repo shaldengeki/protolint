@@ -1,0 +1,40 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "importsSorted_proto",
+    srcs = [
+        "notSorted.proto",
+        "notSortedWithNewline.proto",
+        "sorted.proto",
+        "sortedWithNewline.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:root_proto",
+        "//myproject:myproject_proto",
+        "@com_google_protobuf//:empty_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+go_proto_library(
+    name = "importsSorted_go_proto",
+    importpath = "github.com/yoheimuta/protolint/_testdata/rules/importsSorted",
+    proto = ":importsSorted_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:new.proto",
+        "//:other.proto",
+        "//myproject:main_protos_proto",
+        "//myproject:other_protos_proto",
+    ],
+)
+
+go_library(
+    name = "importsSorted",
+    embed = [":importsSorted_go_proto"],
+    importpath = "github.com/yoheimuta/protolint/_testdata/rules/importsSorted",
+    visibility = ["//visibility:public"],
+)

@@ -1,0 +1,38 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "visitor",
+    srcs = [
+        "baseAddVisitor.go",
+        "baseFixableVisitor.go",
+        "baseVisitor.go",
+        "extendedAutoDisableVisitor.go",
+        "extendedDisableRuleVisitor.go",
+        "hasExtendedVisitor.go",
+    ],
+    importpath = "github.com/yoheimuta/protolint/linter/visitor",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//linter/autodisable",
+        "//linter/disablerule",
+        "//linter/fixer",
+        "//linter/report",
+        "@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library",
+        "@com_github_yoheimuta_go_protoparser_v4//parser/meta:go_default_library",
+    ],
+)
+
+go_test(
+    name = "visitor_test",
+    srcs = ["hasExtendedVisitor_test.go"],
+    deps = [
+        ":visitor",
+        "//internal/linter/file",
+        "//internal/setting_test",
+        "//internal/util_test",
+        "//linter/autodisable",
+        "//linter/report",
+        "@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library",
+        "@com_github_yoheimuta_go_protoparser_v4//parser/meta:go_default_library",
+    ],
+)

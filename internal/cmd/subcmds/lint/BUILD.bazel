@@ -1,0 +1,29 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "lint",
+    srcs = [
+        "autoDisableFlag.go",
+        "cmdLint.go",
+        "cmdLintConfig.go",
+        "flags.go",
+        "reporterFlag.go",
+    ],
+    importpath = "github.com/yoheimuta/protolint/internal/cmd/subcmds/lint",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/addon/plugin/shared",
+        "//internal/cmd/subcmds",
+        "//internal/linter",
+        "//internal/linter/config",
+        "//internal/linter/file",
+        "//internal/linter/report",
+        "//internal/linter/report/reporters",
+        "//internal/osutil",
+        "//linter/autodisable",
+        "//linter/report",
+        "//linter/rule",
+        "@com_github_hashicorp_go_plugin//:go_default_library",
+        "@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library",
+    ],
+)

@@ -1,0 +1,18 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "plugin",
+    srcs = [
+        "externalRule.go",
+        "externalRuleProvider.go",
+    ],
+    importpath = "github.com/yoheimuta/protolint/internal/addon/plugin",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/addon/plugin/shared",
+        "//linter/report",
+        "//linter/rule",
+        "@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library",
+        "@com_github_yoheimuta_go_protoparser_v4//parser/meta:go_default_library",
+    ],
+)

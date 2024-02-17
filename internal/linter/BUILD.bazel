@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "linter",
+    srcs = ["linter.go"],
+    importpath = "github.com/yoheimuta/protolint/internal/linter",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//linter/report",
+        "//linter/rule",
+        "@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library",
+    ],
+)

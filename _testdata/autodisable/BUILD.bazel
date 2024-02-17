@@ -1,0 +1,35 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "autodisable_proto",
+    srcs = [
+        "disabled_enum_field_names.proto",
+        "disabled_inline_enum_field_names.proto",
+        "disabled_inline_line_enum_field_names.proto",
+        "disabled_many_enum_field_names.proto",
+        "disabled_merge_inline_enum_field_names.proto",
+        "disabled_nomerge_enum_field_names.proto",
+        "invalid_enum_field_names.proto",
+        "invalid_enum_field_names_comment.proto",
+        "invalid_inline_disable_enum_field_names.proto",
+        "invalid_inline_enum_field_names.proto",
+        "invalid_many_enum_field_names.proto",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+go_proto_library(
+    name = "autodisable_go_proto",
+    importpath = "github.com/yoheimuta/protolint/_testdata/autodisable",
+    proto = ":autodisable_proto",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "autodisable",
+    embed = [":autodisable_go_proto"],
+    importpath = "github.com/yoheimuta/protolint/_testdata/autodisable",
+    visibility = ["//visibility:public"],
+)

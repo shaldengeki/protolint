@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "fixer",
+    srcs = ["fixer.go"],
+    importpath = "github.com/yoheimuta/protolint/linter/fixer",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//internal/osutil",
+        "@com_github_yoheimuta_go_protoparser_v4//lexer:go_default_library",
+        "@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library",
+        "@com_github_yoheimuta_go_protoparser_v4//parser/meta:go_default_library",
+    ],
+)

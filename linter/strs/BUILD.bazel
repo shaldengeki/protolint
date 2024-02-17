@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "strs",
+    srcs = [
+        "pluralize.go",
+        "strs.go",
+    ],
+    importpath = "github.com/yoheimuta/protolint/linter/strs",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_gertd_go_pluralize//:go_default_library"],
+)
+
+go_test(
+    name = "strs_test",
+    srcs = [
+        "pluralize_test.go",
+        "strs_test.go",
+    ],
+    deps = [":strs"],
+)

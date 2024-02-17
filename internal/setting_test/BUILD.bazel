@@ -1,0 +1,8 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "setting_test",
+    srcs = ["setting.go"],
+    importpath = "github.com/yoheimuta/protolint/internal/setting_test",
+    visibility = ["//:__subpackages__"],
+)

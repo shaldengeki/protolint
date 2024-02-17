@@ -1,0 +1,17 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "osutil",
+    srcs = [
+        "exitCode.go",
+        "file.go",
+    ],
+    importpath = "github.com/yoheimuta/protolint/internal/osutil",
+    visibility = ["//:__subpackages__"],
+)
+
+go_test(
+    name = "osutil_test",
+    srcs = ["file_test.go"],
+    deps = [":osutil"],
+)

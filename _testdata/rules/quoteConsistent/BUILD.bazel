@@ -1,0 +1,37 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "foo_proto",
+    srcs = [
+        "double-quoted.proto",
+        "inconsistent.proto",
+        "single-quoted.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:root_proto",
+        "//google/protobuf:protobuf_proto",
+        "@com_google_protobuf//:empty_proto",
+    ],
+)
+
+go_proto_library(
+    name = "foo_go_proto",
+    importpath = "github.com/yoheimuta/protolint/_testdata/rules/quoteConsistent",
+    proto = ":foo_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//:new.proto",
+        "//:new2.proto",
+        "//google/protobuf:empty2_proto",
+    ],
+)
+
+go_library(
+    name = "quoteConsistent",
+    embed = [":foo_go_proto"],
+    importpath = "github.com/yoheimuta/protolint/_testdata/rules/quoteConsistent",
+    visibility = ["//visibility:public"],
+)

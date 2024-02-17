@@ -1,0 +1,21 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "subcmds",
+    srcs = [
+        "pluginFlag.go",
+        "rules.go",
+    ],
+    importpath = "github.com/yoheimuta/protolint/internal/cmd/subcmds",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//internal/addon/plugin",
+        "//internal/addon/plugin/shared",
+        "//internal/addon/rules",
+        "//internal/linter/config",
+        "//internal/linter/rule",
+        "//linter/autodisable",
+        "@com_github_hashicorp_go_hclog//:go_default_library",
+        "@com_github_hashicorp_go_plugin//:go_default_library",
+    ],
+)

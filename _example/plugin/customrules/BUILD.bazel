@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "customrules",
+    srcs = [
+        "enumNamesLowerSnakeCaseRule.go",
+        "simpleRule.go",
+    ],
+    importpath = "github.com/yoheimuta/protolint/_example/plugin/customrules",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//linter/report",
+        "//linter/rule",
+        "//linter/strs",
+        "//linter/visitor",
+        "@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library",
+        "@com_github_yoheimuta_go_protoparser_v4//parser/meta:go_default_library",
+    ],
+)

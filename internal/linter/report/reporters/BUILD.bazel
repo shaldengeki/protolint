@@ -1,0 +1,43 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "reporters",
+    srcs = [
+        "ciReporter.go",
+        "jUnitReporter.go",
+        "jsonReporter.go",
+        "plainReporter.go",
+        "sarifReporter.go",
+        "sonarReporter.go",
+        "tscReporter.go",
+        "unixReporter.go",
+    ],
+    importpath = "github.com/yoheimuta/protolint/internal/linter/report/reporters",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//linter/report",
+        "//linter/rule",
+        "@com_github_chavacava_garif//:go_default_library",
+        "@com_github_yoheimuta_go_protoparser_v4//parser/meta:go_default_library",
+    ],
+)
+
+go_test(
+    name = "reporters_test",
+    srcs = [
+        "ciReporter_test.go",
+        "jUnitReporter_test.go",
+        "jsonReporter_test.go",
+        "plainReporter_test.go",
+        "sarifReporter_test.go",
+        "sonarReporter_test.go",
+        "tscReporter_test.go",
+        "unixReporter_test.go",
+    ],
+    deps = [
+        ":reporters",
+        "//linter/report",
+        "//linter/rule",
+        "@com_github_yoheimuta_go_protoparser_v4//parser/meta:go_default_library",
+    ],
+)

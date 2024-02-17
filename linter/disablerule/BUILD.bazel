@@ -1,0 +1,22 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "disablerule",
+    srcs = [
+        "command.go",
+        "commands.go",
+        "interpreter.go",
+    ],
+    importpath = "github.com/yoheimuta/protolint/linter/disablerule",
+    visibility = ["//visibility:public"],
+    deps = ["@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library"],
+)
+
+go_test(
+    name = "disablerule_test",
+    srcs = ["interpreter_test.go"],
+    deps = [
+        ":disablerule",
+        "@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library",
+    ],
+)

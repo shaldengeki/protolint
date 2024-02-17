@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+
+go_library(
+    name = "autodisable",
+    srcs = [
+        "commentator.go",
+        "nextPlacementStrategy.go",
+        "placementStrategy.go",
+        "thisThenNextPlacementStrategy.go",
+    ],
+    importpath = "github.com/yoheimuta/protolint/linter/autodisable",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//linter/disablerule",
+        "//linter/fixer",
+        "@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library",
+    ],
+)
+
+go_test(
+    name = "autodisable_test",
+    srcs = ["placementStrategy_test.go"],
+    deps = [
+        ":autodisable",
+        "//internal/setting_test",
+        "//internal/util_test",
+        "@com_github_yoheimuta_go_protoparser_v4//parser:go_default_library",
+        "@com_github_yoheimuta_go_protoparser_v4//parser/meta:go_default_library",
+    ],
+)
